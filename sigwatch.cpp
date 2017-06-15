@@ -96,6 +96,7 @@ void UnixSignalWatcherPrivate::watchForSignal(int signal)
     // Register a sigaction which will write to the socket pair
     struct sigaction sigact;
     sigact.sa_handler = UnixSignalWatcherPrivate::signalHandler;
+    sigact.sa_flags = 0;
     ::sigemptyset(&sigact.sa_mask);
     sigact.sa_flags |= SA_RESTART;
     if (::sigaction(signal, &sigact, NULL)) {
